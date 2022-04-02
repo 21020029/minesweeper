@@ -1,10 +1,4 @@
-#include <bits/stdc++.h>
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
-#include "Constances.hpp"
-#include "Variables.hpp"
+
 
 void quitSDLError(bool fatal) {
     std::cout << "Error: " << SDL_GetError() << std::endl;

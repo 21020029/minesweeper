@@ -1,5 +1,3 @@
-#pragma once
-
 const int TILE_SIZE = 32;
 const int BUTTON_SPRITE_TOTAL = 12;
 
