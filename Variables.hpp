@@ -1,11 +1,17 @@
-SDL_Window* gWindow = NULL;
-SDL_Renderer* gRenderer = NULL;
-SDL_Texture* gTexture = NULL;
-
-TTF_Font* gameOver = NULL;
-TTF_Font* gameWin = NULL;
-TTF_Font* gameLose = NULL;
-
 LTexture gTextTexture;
 LTexture gPlayWin;
 LTexture gPlayLose;
+LTexture gWinTexture;
+LTexture gBackground;
+LTexture gButtonSprite;
+
+SDL_Rect gSpriteClips[BUTTON_SPRITE_TOTAL];
+extern int gBoard[ROW_SIZE][COL_SIZE];
+extern int gTable[ROW_SIZE][COL_SIZE];
+
+int countLeft = MINE_COUNT;
+int countTileLeft = ROW_SIZE * COL_SIZE;
+bool loseGame= 0;
+bool isWinning = 0;
+
+stringstream mineLeft;
