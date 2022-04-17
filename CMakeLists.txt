@@ -16,6 +16,7 @@ InitWindows.hpp
 Texture.hpp 
 Button.hpp
 loadMedia.hpp 
+Game.hpp
 Variables.hpp 
 Constances.hpp )
 

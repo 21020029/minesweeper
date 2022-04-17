@@ -1,5 +1,4 @@
 
-
 void quitSDLError(bool fatal) {
     std::cout << "Error: " << SDL_GetError() << std::endl;
     if(fatal) {

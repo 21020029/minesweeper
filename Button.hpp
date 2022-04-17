@@ -50,7 +50,7 @@ void LButton::handleEvent(SDL_Event* e) {
         if(inside) {
             if(e->type == SDL_MOUSEBUTTONDOWN) {
                 Mix_PlayChannel(-1, click, 0);
-                swtich(e->button.button) {
+                switch(e->button.button) {
                     case SDL_BUTTON_LEFT: {
                         reveal(i, j);
                         if(gBoard[i][j] == 9) {
@@ -60,7 +60,7 @@ void LButton::handleEvent(SDL_Event* e) {
                     }
                     case SDL_BUTTON_RIGHT: {
                         if(gTable[i][j] >= 10) {
-                            if(gTablep[i][j] == 10) {
+                            if(gTable[i][j] == 10) {
                                 if(countLeft == 0) break;
                                 gTable[i][j] = 11;
                                 countLeft--;
@@ -80,3 +80,5 @@ void LButton::handleEvent(SDL_Event* e) {
 void LButton::render(int i, int j) {
     gButtonSprite.render(mPosition.x, mPosition.y, &gSpriteClips[gTable[i][j]]);
 }
+
+LButton gButtons[ROW_SIZE][COL_SIZE];

@@ -7,10 +7,18 @@
 
 #include "Constances.hpp"
 #include "Texture.hpp"
+#include "Button.hpp"
 #include "Variables.hpp"
 
 #include "InitWindows.hpp"
+#include "loadMedia.hpp"
 
 int main(int argc, char *argv[]) {
     initProgram();
+    if(!loadMedia()) {
+        std::cout << "Failed to load media\n";
+    } else {
+        bool quit = false;
+        SDL_Event e;
+    }
 }

@@ -84,5 +84,23 @@ void LTexture::render(int x, int y, SDL_Rect* clip) {
     SDL_RenderCopy(gRenderer, mTexture, clip, &renderQuad);
 }
 
+int LTexture::getHeight() {
+    return mHeight;
+}
+
+int LTexture::getWidth() {
+    return mWidth;
+}
+
+LTexture gTextTexture;
+LTexture gPlayWin;
+LTexture gPlayLose;
+LTexture gWinTexture;
+LTexture gBackground;
+LTexture gButtonSprite;
+LTexture gMineLeft;
+
+SDL_Rect gSpriteClips[BUTTON_SPRITE_TOTAL];
+
 
 // #endif 
