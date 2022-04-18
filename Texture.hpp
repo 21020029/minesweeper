@@ -93,8 +93,7 @@ int LTexture::getWidth() {
 }
 
 LTexture gTextTexture;
-LTexture gPlayWin;
-LTexture gPlayLose;
+LTexture gPlayAgain;
 LTexture gWinTexture;
 LTexture gBackground;
 LTexture gButtonSprite;

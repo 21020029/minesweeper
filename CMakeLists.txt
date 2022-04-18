@@ -13,11 +13,11 @@ link_directories(${SDL2_LIB_DIR})
 
 add_executable(minesweeper main.cpp 
 InitWindows.hpp 
+loadMedia.hpp 
+Menu.hpp
+Game.hpp
 Texture.hpp 
 Button.hpp
-loadMedia.hpp 
-Game.hpp
-Variables.hpp 
 Constances.hpp )
 
 target_link_libraries(minesweeper ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_MIXER_LIBRARY} ${SDL2_TTF_LIBRARY} -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf)

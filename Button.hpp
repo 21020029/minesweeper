@@ -81,4 +81,4 @@ void LButton::render(int i, int j) {
     gButtonSprite.render(mPosition.x, mPosition.y, &gSpriteClips[gTable[i][j]]);
 }
 
-LButton gButtons[ROW_SIZE][COL_SIZE];
+std::vector<std::vector<LButton>> gButtons;

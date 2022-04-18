@@ -8,10 +8,11 @@
 #include "Constances.hpp"
 #include "Texture.hpp"
 #include "Button.hpp"
-#include "Variables.hpp"
 
 #include "InitWindows.hpp"
 #include "loadMedia.hpp"
+#include "Menu.hpp"
+#include "Game.hpp"
 
 int main(int argc, char *argv[]) {
     initProgram();
