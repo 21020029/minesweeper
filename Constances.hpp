@@ -1,5 +1,6 @@
 const int TILE_SIZE = 32;
 const int BUTTON_SPRITE_TOTAL = 12;
+const int MENU_ITEM = 2;
 
 const int SCREEN_WITDH = 500;
 const int SCREEN_HEIGHT = 500;
@@ -25,6 +26,11 @@ int countLeft;
 int countTileLeft;
 bool loseGame= 0;
 bool isWinning = 0;
+
+Uint32 frameStart;
+unsigned int frameTime;
+const int FPS = 30;
+const int frameDelay = 1000 / FPS;
 
 std::vector<std::vector<int>> gBoard, gTable;
 
