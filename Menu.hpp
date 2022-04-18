@@ -5,6 +5,7 @@ bool checkInside(int x, int y, SDL_Rect &rect) {
     return (x >= u && x <= u + l && y >= v && y <= v + l);
 }
 
+
 int makeMenu() {
     LTexture textMenu[MENU_ITEM];
     bool selectedMenu[MENU_ITEM] = {0, 0};
