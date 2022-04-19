@@ -11,8 +11,10 @@ public:
     void render(int x, int y, SDL_Rect* clip = NULL);
     int getWidth();
     int getHeight();
+    SDL_Rect getRect();
 private:
     SDL_Texture* mTexture;
+    SDL_Rect rect;
     int mWidth;
     int mHeight;
 };
@@ -58,9 +60,9 @@ bool LTexture::loadFromFile(std::string path) {
             std::cout << "Unable to create texture" << std::endl;
         } else {
             mWidth = loadedSurface -> w;
-            mHeight = loadedSurface -> h;
         }
         SDL_FreeSurface(loadedSurface);
+            mHeight = loadedSurface -> h;
     }
     mTexture = newTexture;
     return mTexture != NULL;
@@ -90,6 +92,10 @@ int LTexture::getHeight() {
 
 int LTexture::getWidth() {
     return mWidth;
+}
+
+SDL_Rect LTexture::getRect() {
+    return rect;
 }
 
 LTexture gTextTexture;
