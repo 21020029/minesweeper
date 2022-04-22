@@ -5,7 +5,7 @@ void initTable(int rowSize, int colSize) {
     gBoard.resize(ROW_SIZE + 2, std::vector<int>(COL_SIZE + 2, BLANK));
     gButtons.resize(ROW_SIZE + 2, std::vector<LButton>(COL_SIZE + 2));
     countLeft = mineCount;
-    DISTANCE_BETWEEN = (SCREEN_WIDTH  - (ROW_SIZE + 2) * COL_SIZE) / 2;
+    DISTANCE_BETWEEN = (SCREEN_WIDTH  - (ROW_SIZE + 2) * TILE_SIZE) / 2;
     SDL_SetWindowSize(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_SetWindowPosition(gWindow, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
     for (int i = 1; i <= ROW_SIZE; ++i) {
@@ -25,15 +25,15 @@ void createGame() {
 
     int numBomb = 0;
     while(numBomb < mineCount) {
-        int i = rnd(0, ROW_SIZE - 1);
-        int j = rnd(0, COL_SIZE - 1);
+        int i = rnd(1, ROW_SIZE);
+        int j = rnd(1, COL_SIZE);
         if(gBoard[i][j] == MINE) continue;
         gBoard[i][j] = MINE;
         numBomb++;
         for (int di = 0; di < 8; ++di) {
             int ni = i + dx[di];
             int nj = j + dy[di];
-            if(!(ni >= 0 && nj >= 0 && ni < ROW_SIZE && nj < COL_SIZE)) continue;
+            if(!(ni > 0 && nj > 0 && ni <= ROW_SIZE && nj <= COL_SIZE)) continue;
             if(gBoard[ni][nj] == MINE) continue;
             gBoard[ni][nj]++;
         }
@@ -47,11 +47,11 @@ bool checkWinGame() {
             if(gBoard[i][j] == MINE) {
                 if(gTable[i][j] != FLAG) {
                     return false;
-                }
+                } else win = true;
             }
         }
     }
-    return true;
+    return win;
 }
 
 void mineManager() {
@@ -82,7 +82,7 @@ void flagManager() {
         }
         gWinTexture.render((SCREEN_WIDTH - gWinTexture.getWidth()) / 2, 30);
         gPlayAgain.render((SCREEN_WIDTH - gPlayAgain.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgain.getHeight());
-        Mix_PlayChannel(-1, loser, 0);
+        Mix_PlayChannel(-1, boom_sound, 0);
     }
     if(loseGame) {
         for (int i = 1; i <= ROW_SIZE; ++i) {
@@ -98,7 +98,7 @@ void flagManager() {
         }
         gWinTexture.render((SCREEN_WIDTH - gWinTexture.getWidth()) / 2, 30);
         gPlayAgain.render((SCREEN_WIDTH - gPlayAgain.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgain.getHeight());
-        Mix_PlayChannel(-1, loser, 0);
+        Mix_PlayChannel(-1, boom_sound, 0);
     }
 }
 

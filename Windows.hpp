@@ -34,7 +34,7 @@ void exitGame() {
     TTF_CloseFont(gFont);
 
     Mix_FreeChunk(click);
-    Mix_FreeChunk(loser);
+    Mix_FreeChunk(boom_sound);
     Mix_FreeChunk(winner);
     Mix_FreeChunk(flag);
 

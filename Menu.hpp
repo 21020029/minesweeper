@@ -2,11 +2,15 @@ bool checkInside(const int &x, const int &y, const SDL_Rect &rect) {
     int u = rect.x;
     int v = rect.y;
     int l = rect.w;
-    return (x >= u && x <= u + l && y >= v && y <= v + l);
+    return (x > u && x < u + l && y > v && y < v + l);
 }
 
 
 int makeMenu() {
+    SCREEN_WIDTH = 500;
+    SCREEN_HEIGHT = 500;
+    SDL_SetWindowSize(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT);
+    SDL_SetWindowPosition(gWindow, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
     LTexture textMenu[MENU_ITEM];
     bool selectedMenu[MENU_ITEM] = {0, 0};
     std::string labels[MENU_ITEM] = {"NEW GAME", "EXIT"};
@@ -14,6 +18,8 @@ int makeMenu() {
     for (int i = 0; i < MENU_ITEM; ++i) 
         textMenu[i].loadFromRenderedText(labels[i], {0, 0, 0});
     
+    int x = 0, y = 0;
+
     SDL_Event e;
     for (;;) {
         frameStart = SDL_GetTicks();
@@ -31,8 +37,8 @@ int makeMenu() {
                         return EXIT;
                     break;
                 case SDL_MOUSEMOTION: {
-                    int x = e.motion.x;
-                    int y = e.motion.y;
+                    x = e.motion.x;
+                    y = e.motion.y;
                     for (int i = 0; i < MENU_ITEM; ++i) {
                         if(checkInside(x, y, textMenu[i].getRect())) {
                             if(!selectedMenu[i]) {
@@ -49,8 +55,8 @@ int makeMenu() {
                 }
                 break;
                 case SDL_MOUSEBUTTONDOWN: {
-                    int x = e.motion.x;
-                    int y = e.motion.y;
+                    x = e.motion.x;
+                    y = e.motion.y;
                     for (int i = 0; i < MENU_ITEM; ++i) {
                         if(checkInside(x, y, textMenu[i].getRect())) {
                             for (int j = 0; j < MENU_ITEM; ++j) {
@@ -76,12 +82,14 @@ int showGameMode() {
     static const int numGameMode = 2;
     LTexture textMenu[numGameMode];
     bool selectedMenu[numGameMode] = {0, 0};
-    std::string labels[numGameMode] = {"Easy (9 x 9 and 10 mines)"
-                                , "Hard (11 x 11 and 25 mines)"};
+    std::string labels[numGameMode] = {"Easy (9 x 9)"
+                                , "Hard (11 x 11)"};
 
     for (int i = 0; i < numGameMode; ++i) {
         textMenu[i].loadFromRenderedText(labels[i], {0, 0, 0});
     }
+
+    int x = 0, y = 0;
 
     SDL_Event e;
     for (;;) {
@@ -101,8 +109,8 @@ int showGameMode() {
                     }
                     break;
                 case SDL_MOUSEMOTION: {
-                    int x = e.motion.x;
-                    int y = e.motion.y;
+                    x = e.motion.x;
+                    y = e.motion.y;
                     for (int i = 0; i < numGameMode; ++i) {
                         if(checkInside(x, y, textMenu[i].getRect())) {
                             if(!selectedMenu[i]) {
@@ -119,8 +127,8 @@ int showGameMode() {
                 }
                 break;
                 case SDL_MOUSEBUTTONDOWN: {
-                    int x = e.motion.x;
-                    int y = e.motion.y;
+                    x = e.motion.x;
+                    y = e.motion.y;
                     for (int i = 0; i < numGameMode; ++i) {
                         if(checkInside(x, y, textMenu[i].getRect())) {
                             for (int j = 0; j < numGameMode; ++j) {

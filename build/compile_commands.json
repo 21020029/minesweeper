@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/flower/dev/code/project/cplusplus/minesweeper/build",
+  "command": "/usr/bin/g++ -I/usr/local/include/SDL2 -g -std=gnu++14 -o CMakeFiles/minesweeper.dir/main.cpp.o -c /home/flower/dev/code/project/cplusplus/minesweeper/main.cpp",
+  "file": "/home/flower/dev/code/project/cplusplus/minesweeper/main.cpp"
+}
+]

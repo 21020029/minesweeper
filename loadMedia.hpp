@@ -1,6 +1,7 @@
 
 bool loadMedia() {
     bool okay = true;
+    SDL_SetRenderDrawColor(gRenderer, 204, 204, 204, 255);
     gFont = TTF_OpenFont("font/myfont.ttf", 40);
     SDL_Color textColor = {140, 140, 140};
     if(!gTextTexture.loadFromRenderedText("GAME OVER", textColor)) {
@@ -29,7 +30,7 @@ bool loadMedia() {
     }
 
     winner = Mix_LoadWAV("sound/winner.wav");
-    loser = Mix_LoadWAV("sound/loser.wav");
+    boom_sound = Mix_LoadWAV("sound/loser.wav");
     click = Mix_LoadWAV("sound/click.wav");
     flag = Mix_LoadWAV("sound/flag.wav");
 

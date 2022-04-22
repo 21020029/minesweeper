@@ -38,9 +38,9 @@ int main(int argc, char *argv[]) {
                         }   
                         case Hard: {
                             quitGame = false;
-                            mineCount = 25;
-                            ROW_SIZE = 11;
-                            COL_SIZE = 11;
+                            mineCount = 40;
+                            ROW_SIZE = 16;
+                            COL_SIZE = 16;
                             SCREEN_HEIGHT = 800;
                             SCREEN_WIDTH = 800;
                             initTable(ROW_SIZE, COL_SIZE);
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
                         while(!loseGame && !quitGame && !isWinning) {
                             frameStart = SDL_GetTicks();
                             SDL_RenderClear(gRenderer);
-                            while(SDL_PollEvent(&e)) {
+                            while(SDL_PollEvent(&e) != 0) {
                                 if(e.type == SDL_QUIT) {
                                     quitGame = true;
                                     quit = true;
