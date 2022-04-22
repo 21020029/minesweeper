@@ -1,15 +1,18 @@
 void reveal(int i, int j) {
     if(gTable[i][j] == 10 or gTable[i][j] == 11) {
-        if(gTable[i][j] == 11) {
-            countLeft--;
+        if(gTable[i][j] == FLAG) {
+            countLeft++;
         }
         gTable[i][j] = gBoard[i][j];
-        countTileLeft--;
+        if(gBoard[i][j] == MINE) {
+            loseGame = true;
+        }
         if(gTable[i][j] == 0) {
             for (int x = 0; x < NUM_DIRECTION; ++x) {
                 int u = i + dx[x];
                 int v = j + dy[x];
                 if(!(u >= 0 && u < ROW_SIZE && v <= 0 && v < COL_SIZE)) continue;
+                if(gBoard[i][j] == MINE) continue;
                 reveal(u, v);
             }
         }
@@ -21,6 +24,8 @@ class LButton {
     LButton();
     void setPosition(int x, int y);
     void handleEvent(SDL_Event* e);
+    bool correctFlag(int i, int j);
+    void dfs(int i, int j);
     void render(int i, int j);
     private:
     SDL_Point mPosition;
@@ -36,8 +41,30 @@ void LButton::setPosition(int x, int y) {
     mPosition.y = y;
 }
 
+bool LButton::correctFlag(int i, int j) {
+    int flags = 0;
+    for (int k = i - 1; k <= i + 1; ++k) {
+        for (int l = j - 1; l <= j + 1; ++l) {
+            if(gTable[k][l] == FLAG) {
+                flags++;
+            }
+        }
+    }
+    return flags == gBoard[i][j];
+}
+
+void LButton::dfs(int i, int j) {
+    for (int k = i - 1; k <= i + 1; ++k) {
+        for (int l = j - 1; l <= j + 1; ++l) {
+            if(gBoard[k][l] != FLAG) {
+                reveal(k, l);
+            }
+        }
+    }
+}
+
 void LButton::handleEvent(SDL_Event* e) {
-    if(e -> type == SDL_MOUSEMOTION || e -> type == SDL_MOUSEBUTTONDOWN || e -> type == SDL_MOUSEBUTTONUP) {
+    if(e -> type == SDL_MOUSEBUTTONDOWN) {
         int x, y;
         SDL_GetMouseState(&x, &y);
         int i = (y - DISTANCE_BETWEEN) / TILE_SIZE;
@@ -46,29 +73,38 @@ void LButton::handleEvent(SDL_Event* e) {
         if(x < mPosition.x) inside = false;
         if(x > mPosition.x + TILE_SIZE) inside = false;
         if(y < mPosition.y) inside = false;
-        if(y > mPosition.y) inside = false;
+        if(y > mPosition.y + TILE_SIZE) inside = false;
         if(inside) {
             if(e->type == SDL_MOUSEBUTTONDOWN) {
-                Mix_PlayChannel(-1, click, 0);
                 switch(e->button.button) {
+                    Mix_PlayChannel(-1, click, 0);
                     case SDL_BUTTON_LEFT: {
-                        reveal(i, j);
-                        if(gBoard[i][j] == 9) {
-                            loseGame = true;
+                        if(gTable[i][j] == COVER) {
+                            reveal(i, j);
+                            if(gBoard[i][j] != MINE) {
+                                Mix_PlayChannel(-1, click, 0);
+                            }
                         }
                         break;
                     }
                     case SDL_BUTTON_RIGHT: {
-                        if(gTable[i][j] >= 10) {
-                            if(gTable[i][j] == 10) {
-                                if(countLeft == 0) break;
-                                gTable[i][j] = 11;
-                                countLeft--;
-                            } else {
-                                gTable[i][j] = 10;
-                                countLeft--;
-                            }
+                        if(gTable[i][j] == COVER) {
+                            if(countLeft == 0) break;
+                            gTable[i][j] = FLAG;
+                            Mix_PlayChannel(-1, flag, 0);
+                            countLeft--;
+                        } else if(gTable[i][j] == FLAG) {
+                            Mix_PlayChannel(-1, flag, 0);
+                            gTable[i][j] = COVER;
+                            countLeft++;
                         }
+                        break;
+                    }
+                    case SDL_BUTTON_MIDDLE: {
+                        if(gTable[i][j] < MINE && correctFlag(i, j)) {
+                            dfs(i, j);
+                            Mix_PlayChannel(-1, click, 0);
+                        } 
                         break;
                     }
                 }                

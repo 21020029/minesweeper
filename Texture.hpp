@@ -6,7 +6,7 @@ public:
     LTexture();
     ~LTexture();
     bool loadFromFile(std::string path);
-    bool loadFromRenderedText(std::string myText, SDL_Color myColor, TTF_Font* gFont = NULL);
+    bool loadFromRenderedText(std::string myText, SDL_Color myColor);
     void free();
     void render(int x, int y, SDL_Rect* clip = NULL);
     int getWidth();
@@ -29,11 +29,12 @@ LTexture::~LTexture() {
     free();
 }
 
-bool LTexture::loadFromRenderedText(std::string myText, SDL_Color myColor, TTF_Font* gFont) {
+bool LTexture::loadFromRenderedText(std::string myText, SDL_Color myColor) {
     free();
     SDL_Surface* textSurface  = TTF_RenderText_Solid(gFont, myText.c_str(), myColor);
     if(textSurface == NULL) {
         std::cout << "Unable to render text surface! SDL_ttf error: " << TTF_GetError() << '\n';
+        std::cout << myText << '\n';
     } else {
         mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
         if(mTexture == NULL) {
@@ -60,30 +61,28 @@ bool LTexture::loadFromFile(std::string path) {
             std::cout << "Unable to create texture" << std::endl;
         } else {
             mWidth = loadedSurface -> w;
+            mHeight = loadedSurface -> h;
         }
         SDL_FreeSurface(loadedSurface);
-            mHeight = loadedSurface -> h;
     }
     mTexture = newTexture;
     return mTexture != NULL;
 }
 
 void LTexture::free() {
-    if(mTexture != NULL) {
-        SDL_DestroyTexture(mTexture);
-        mTexture = NULL;
-        mWidth = 0;
-        mHeight = 0;
-    }
+    SDL_DestroyTexture(mTexture);
+    mTexture = NULL;
+    mWidth = 0;
+    mHeight = 0;
 }
 
 void LTexture::render(int x, int y, SDL_Rect* clip) {
-    SDL_Rect renderQuad = {x, y, mWidth, mHeight};
+    rect = {x, y, mWidth, mHeight};
     if(clip != NULL) {
-        renderQuad.w = clip -> w;
-        renderQuad.w = clip -> h;
+        rect.w = clip -> w;
+        rect.w = clip -> h;
     }
-    SDL_RenderCopy(gRenderer, mTexture, clip, &renderQuad);
+    SDL_RenderCopy(gRenderer, mTexture, clip, &rect);
 }
 
 int LTexture::getHeight() {
@@ -101,11 +100,8 @@ SDL_Rect LTexture::getRect() {
 LTexture gTextTexture;
 LTexture gPlayAgain;
 LTexture gWinTexture;
-LTexture gBackground;
 LTexture gButtonSprite;
 LTexture gMineLeft;
 
 SDL_Rect gSpriteClips[BUTTON_SPRITE_TOTAL];
-
-
 // #endif 

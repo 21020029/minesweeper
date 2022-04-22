@@ -2,8 +2,8 @@ const int TILE_SIZE = 32;
 const int BUTTON_SPRITE_TOTAL = 12;
 const int MENU_ITEM = 2;
 
-const int SCREEN_WITDH = 500;
-const int SCREEN_HEIGHT = 500;
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
 
 const int NUM_DIRECTION = 8;
 
@@ -11,12 +11,12 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 SDL_Texture* gTexture = NULL;
 
-TTF_Font* gameOver = NULL;
-TTF_Font* gamePlayAgain = NULL;
+TTF_Font* gFont = NULL;
 
-Mix_Music *winner = NULL;
+Mix_Chunk *winner = NULL;
 Mix_Chunk *loser = NULL;
 Mix_Chunk *click = NULL;
+Mix_Chunk *flag = NULL;
 
 int mineCount;
 int ROW_SIZE;
@@ -46,7 +46,6 @@ enum title {
 
 enum gameModeSelect {
     Easy,
-    Medium, 
     Hard
 };
 

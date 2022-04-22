@@ -19,9 +19,9 @@ int makeMenu() {
         frameStart = SDL_GetTicks();
         SDL_RenderClear(gRenderer);
         for (int i = 0; i < MENU_ITEM; ++i) {
-            textMenu[i].render((SCREEN_WIDTH - textMenu[i].getWidth()) / 2, (SCREEN_HEIGHT - textMenu[i].getHeight()) / 3 + i * 60);
+            textMenu[i].render((SCREEN_WIDTH - textMenu[i].getWidth()) / 2, (SCREEN_HEIGHT - textMenu[i].getHeight()) * 1 / 3 + i * 60);
         }
-        while(SDL_PollEvent(&e)) {
+        while(SDL_PollEvent(&e) != 0) {
             switch(e.type) {
                 case SDL_QUIT:
                     return EXIT;
@@ -73,12 +73,11 @@ int makeMenu() {
 }
 
 int showGameMode() {
-    static const int numGameMode = 3;
+    static const int numGameMode = 2;
     LTexture textMenu[numGameMode];
     bool selectedMenu[numGameMode] = {0, 0};
     std::string labels[numGameMode] = {"Easy (9 x 9 and 10 mines)"
-                                , "Medium (11 x 11 and 25 mines)"
-                                , "Hard (16 x 16 and 40 mines"};
+                                , "Hard (11 x 11 and 25 mines)"};
 
     for (int i = 0; i < numGameMode; ++i) {
         textMenu[i].loadFromRenderedText(labels[i], {0, 0, 0});
@@ -89,7 +88,7 @@ int showGameMode() {
         frameStart = SDL_GetTicks();
         SDL_RenderClear(gRenderer);
         for (int i = 0; i < numGameMode; ++i) {
-            textMenu[i].render((SCREEN_WIDTH - textMenu[i].getWidth()) / 2, (SCREEN_HEIGHT - textMenu[i].getHeight()) / 4 + i * 60);
+            textMenu[i].render((SCREEN_WIDTH - textMenu[i].getWidth()) / 2, (SCREEN_HEIGHT - textMenu[i].getHeight()) * 1 / 3 + i * 60);
         }
         while(SDL_PollEvent(&e) != 0) {
             switch(e.type) {
@@ -106,11 +105,40 @@ int showGameMode() {
                     int y = e.motion.y;
                     for (int i = 0; i < numGameMode; ++i) {
                         if(checkInside(x, y, textMenu[i].getRect())) {
-                            
+                            if(!selectedMenu[i]) {
+                                selectedMenu[i] = true;
+                                textMenu[i].loadFromRenderedText(labels[i], {255, 0, 0});
+                            }
+                        } else {
+                            if(selectedMenu[i]) {
+                                selectedMenu[i] = false;
+                                textMenu[i].loadFromRenderedText(labels[i], {0, 0, 0}); 
+                            }
                         }
                     }
                 }
+                break;
+                case SDL_MOUSEBUTTONDOWN: {
+                    int x = e.motion.x;
+                    int y = e.motion.y;
+                    for (int i = 0; i < numGameMode; ++i) {
+                        if(checkInside(x, y, textMenu[i].getRect())) {
+                            for (int j = 0; j < numGameMode; ++j) {
+                                textMenu[i].free();
+                            }
+                            Mix_PlayChannel(-1, click, 0);
+                            return i;
+                        }
+                    }
+                }
+                break;
+            }
+            SDL_RenderPresent(gRenderer);
+            frameTime = SDL_GetTicks() - frameStart;
+            if(frameDelay > frameTime) {
+                SDL_Delay(frameDelay - frameTime);
             }
         }
     }
+    return 0;
 }

@@ -12,10 +12,11 @@ include_directories(${SDL2_INCLUDE_DIR})
 link_directories(${SDL2_LIB_DIR})
 
 add_executable(minesweeper main.cpp 
-InitWindows.hpp 
+Windows.hpp 
 loadMedia.hpp 
 Menu.hpp
 Game.hpp
+Time.hpp
 Texture.hpp 
 Button.hpp
 Constances.hpp )
