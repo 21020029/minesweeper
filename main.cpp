@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
                     switch (Mode) {
                         case Easy: {
                             quitGame = false;
-                            mineCount = 10;
+                            mineCount = 20;
                             ROW_SIZE = 9;
                             COL_SIZE = 9;
                             initTable(ROW_SIZE, COL_SIZE);

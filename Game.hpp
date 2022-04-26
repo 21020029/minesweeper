@@ -1,11 +1,15 @@
 void initTable(int rowSize, int colSize) {
     ROW_SIZE = rowSize;
     COL_SIZE = colSize;
-    gTable.resize(ROW_SIZE + 2, std::vector<int>(COL_SIZE + 2, COVER));
-    gBoard.resize(ROW_SIZE + 2, std::vector<int>(COL_SIZE + 2, BLANK));
-    gButtons.resize(ROW_SIZE + 2, std::vector<LButton>(COL_SIZE + 2));
+
+    gTable = std::vector<std::vector<int>> (ROW_SIZE + 2, std::vector<int>(COL_SIZE + 2, COVER));
+    gBoard = std::vector<std::vector<int>> (ROW_SIZE + 2, std::vector<int>(COL_SIZE + 2, BLANK));
+    gButtons = std::vector<std::vector<LButton>> (ROW_SIZE + 2, std::vector<LButton>(COL_SIZE + 2));
+
     countLeft = mineCount;
     DISTANCE_BETWEEN = (SCREEN_WIDTH  - (ROW_SIZE + 2) * TILE_SIZE) / 2;
+
+    SDL_RenderClear(gRenderer);
     SDL_SetWindowSize(gWindow, SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_SetWindowPosition(gWindow, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
     for (int i = 1; i <= ROW_SIZE; ++i) {
@@ -96,7 +100,7 @@ void flagManager() {
                 gButtons[i][j].render(i, j);
             }
         }
-        gWinTexture.render((SCREEN_WIDTH - gWinTexture.getWidth()) / 2, 30);
+        gTextTexture.render((SCREEN_WIDTH - gWinTexture.getWidth()) / 2, 30);
         gPlayAgain.render((SCREEN_WIDTH - gPlayAgain.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgain.getHeight());
         Mix_PlayChannel(-1, boom_sound, 0);
     }
@@ -112,7 +116,7 @@ void playAgain(bool &quitGame, bool &quit) {
                 break;
             } 
             case SDL_KEYDOWN: {
-                if(e.key.keysym.sym == SDLK_RETURN) {
+                if(e.key.keysym.sym == SDLK_ESCAPE) {
                     /**
                      * play again
                      */
@@ -124,7 +128,7 @@ void playAgain(bool &quitGame, bool &quit) {
                         fill(begin(gBoard[i]), end(gBoard[i]), BLANK),
                         fill(begin(gTable[i]), end(gTable[i]), COVER);
                     createGame();
-                } else if(e.key.keysym.sym == SDLK_ESCAPE) {
+                } else if(e.key.keysym.sym == SDLK_RETURN) {
                     /**
                      * return to main menu
                      */

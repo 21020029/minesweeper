@@ -2,7 +2,8 @@ bool checkInside(const int &x, const int &y, const SDL_Rect &rect) {
     int u = rect.x;
     int v = rect.y;
     int l = rect.w;
-    return (x > u && x < u + l && y > v && y < v + l);
+    int h = rect.h;
+    return (x > u && x < u + l && y > v && y < v + h);
 }
 
 

@@ -9,7 +9,7 @@ bool loadMedia() {
         okay = false;
     }
     textColor = {30, 140, 140};
-    if(!gPlayAgain.loadFromRenderedText("PRESS ENTER TO PLAY AGAIN", textColor)) {
+    if(!gPlayAgain.loadFromRenderedText("PRESS ESC TO PLAY AGAIN", textColor)) {
         std::cout << "Failed" << std::endl;
         okay = false;
     }

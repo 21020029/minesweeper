@@ -1,5 +1,5 @@
 void reveal(int i, int j) {
-    if(gTable[i][j] == 10 or gTable[i][j] == 11) {
+    if(gTable[i][j] == COVER or gTable[i][j] == FLAG) {
         if(gTable[i][j] == FLAG) {
             countLeft++;
         }
@@ -7,11 +7,11 @@ void reveal(int i, int j) {
         if(gBoard[i][j] == MINE) {
             loseGame = true;
         }
-        if(gTable[i][j] == 0) {
+        if(gTable[i][j] == BLANK) {
             for (int x = 0; x < NUM_DIRECTION; ++x) {
                 int u = i + dx[x];
                 int v = j + dy[x];
-                if(!(u >= 0 && u < ROW_SIZE && v <= 0 && v < COL_SIZE)) continue;
+                if(!(u > 0 && u <= ROW_SIZE && v > 0 && v <= COL_SIZE)) continue;
                 if(gBoard[i][j] == MINE) continue;
                 reveal(u, v);
             }

@@ -14,7 +14,7 @@ SDL_Texture* gTexture = NULL;
 TTF_Font* gFont = NULL;
 
 Mix_Chunk *winner = NULL;
-Mix_Chunk *loser = NULL;
+Mix_Chunk *boom_sound = NULL;
 Mix_Chunk *click = NULL;
 Mix_Chunk *flag = NULL;
 

@@ -11,7 +11,7 @@ void initProgram() {
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
     gWindow = SDL_CreateWindow("Minesweeper 1.0", 
-              SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+              SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if(gWindow == NULL) quitSDLError(1);
     gRenderer = SDL_CreateRenderer(gWindow, -1, 0);
     if(gRenderer == NULL) quitSDLError(1);
