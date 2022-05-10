@@ -1,4 +1,3 @@
-
 bool loadMedia() {
     bool okay = true;
     SDL_SetRenderDrawColor(gRenderer, 204, 204, 204, 255);

@@ -26,7 +26,7 @@ int makeMenu() {
         frameStart = SDL_GetTicks();
         SDL_RenderClear(gRenderer);
         for (int i = 0; i < MENU_ITEM; ++i) {
-            textMenu[i].render((SCREEN_WIDTH - textMenu[i].getWidth()) / 2, (SCREEN_HEIGHT - textMenu[i].getHeight()) * 1 / 3 + i * 60);
+            textMenu[i].render((SCREEN_WIDTH - textMenu[i].getWidth()) / 2, (SCREEN_HEIGHT - textMenu[i].getHeight()) / 3 + i * 60);
         }
         while(SDL_PollEvent(&e) != 0) {
             switch(e.type) {
@@ -97,7 +97,7 @@ int showGameMode() {
         frameStart = SDL_GetTicks();
         SDL_RenderClear(gRenderer);
         for (int i = 0; i < numGameMode; ++i) {
-            textMenu[i].render((SCREEN_WIDTH - textMenu[i].getWidth()) / 2, (SCREEN_HEIGHT - textMenu[i].getHeight()) * 1 / 3 + i * 60);
+            textMenu[i].render((SCREEN_WIDTH - textMenu[i].getWidth()) / 2, (SCREEN_HEIGHT - textMenu[i].getHeight()) / 3 + i * 60);
         }
         while(SDL_PollEvent(&e) != 0) {
             switch(e.type) {
