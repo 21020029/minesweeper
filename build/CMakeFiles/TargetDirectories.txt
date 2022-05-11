@@ -1,5 +1,0 @@
-/home/flower/dev/code/project/cplusplus/minesweeper/build/CMakeFiles/minesweeper.dir
-/home/flower/dev/code/project/cplusplus/minesweeper/build/CMakeFiles/package.dir
-/home/flower/dev/code/project/cplusplus/minesweeper/build/CMakeFiles/package_source.dir
-/home/flower/dev/code/project/cplusplus/minesweeper/build/CMakeFiles/edit_cache.dir
-/home/flower/dev/code/project/cplusplus/minesweeper/build/CMakeFiles/rebuild_cache.dir

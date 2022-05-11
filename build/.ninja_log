@@ -1,9 +1,0 @@
-# ninja log v5
-2	2508	1648020713423404432	CMakeFiles/minesweeper.dir/Button.cpp.o	453593d2354bf376
-3609	3823	1650904492468530087	minesweeper	edd6f478a3fd02c1
-3	3609	1650904492255196505	CMakeFiles/minesweeper.dir/main.cpp.o	124e0dc7c5b09455
-2	2333	1647938677707384170	CMakeFiles/minesweeper.dir/Texture.cpp.o	db3ba27fcd5d359a
-3	5496	1650959946348789993	CMakeFiles/minesweeper.dir/main.cpp.o	124e0dc7c5b09455
-5497	6232	1650959947082122231	minesweeper	edd6f478a3fd02c1
-3	2847	1650960226682499127	CMakeFiles/minesweeper.dir/main.cpp.o	124e0dc7c5b09455
-2847	2973	1650960226809165978	minesweeper	edd6f478a3fd02c1
